@@ -17,6 +17,10 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install StreamYard Package
+        # سنقوم بتثبيت المكتبة اللازمة يدوياً لأن ملف package.json مفقود
+        run: npm install discord.js node-fetch@2
+
       - name: Run the bot
         env:
           TOKEN: ${{ secrets.TOKEN }}
