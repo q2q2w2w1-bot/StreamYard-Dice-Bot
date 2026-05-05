@@ -17,12 +17,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Clean Install
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
       - name: Run the bot
         env:
           TOKEN: ${{ secrets.TOKEN }}
-        run: node bot.js || echo "السكربت واجه مشكلة في تسجيل الدخول"
+        run: node bot.js
