@@ -2,8 +2,8 @@ name: Stay Online Bot
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # سيعمل كل 5 دقائق لضمان عدم خروجك
-  workflow_dispatch: # يتيح لك تشغيله يدوياً بضغطة زر
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,16 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.9'
+          node-version: '16'
 
       - name: Install dependencies
-        run: |
-          pip install requests
+        run: npm install
 
       - name: Run the bot
         env:
-          TOKEN: ${{ secrets.TOKEN }} # هنا سيستخدم التوكن الذي وضعته في الخزنة
-        run: python main.py
+          TOKEN: ${{ secrets.TOKEN }}
+        run: node bot.js
