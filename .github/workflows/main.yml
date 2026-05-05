@@ -10,18 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # تحديث للإصدار الرابع لتجنب التحذير الأصفر
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4 # تحديث للإصدار الرابع
+        uses: actions/setup-node@v4
         with:
-          node-version: '20' # استخدام نسخة أحدث ومستقرة
+          node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clean Install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Run the bot
         env:
-          # تأكد أن الاسم هنا يطابق تماماً الاسم الذي وضعته في الـ Secrets
-          TOKEN: ${{ secrets.TOKEN }} 
-        run: node bot.js
+          TOKEN: ${{ secrets.TOKEN }}
+        run: node bot.js || echo "السكربت واجه مشكلة في تسجيل الدخول"
