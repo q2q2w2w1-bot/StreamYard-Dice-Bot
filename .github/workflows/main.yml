@@ -10,17 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # تحديث للإصدار الرابع لتجنب التحذير الأصفر
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # تحديث للإصدار الرابع
         with:
-          node-version: '16'
+          node-version: '20' # استخدام نسخة أحدث ومستقرة
 
       - name: Install dependencies
         run: npm install
 
       - name: Run the bot
         env:
-          TOKEN: ${{ secrets.TOKEN }}
+          # تأكد أن الاسم هنا يطابق تماماً الاسم الذي وضعته في الـ Secrets
+          TOKEN: ${{ secrets.TOKEN }} 
         run: node bot.js
